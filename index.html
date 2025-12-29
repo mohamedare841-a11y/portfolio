@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPHINX - أبو الهول | رحلات الآثار الفرعونية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="parallax-bg"></div>
+
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <div class="morphing-shapes">
+        <div class="morphing-shape"></div>
+        <div class="morphing-shape"></div>
+        <div class="morphing-shape"></div>
+        <div class="morphing-shape"></div>
+    </div>
+
+    <div class="particle-container" id="particle-container"></div>
+
+    <div class="hieroglyph">𓀀</div>
+    <div class="hieroglyph">𓀁</div>
+    <div class="hieroglyph">𓀂</div>
+    <div class="hieroglyph">𓀃</div>
+    <div class="hieroglyph">𓀄</div>
+    <div class="hieroglyph">𓀅</div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="sphinx-icon"></div>
+                    SPHINX <span style="font-size: 1rem; margin-right: 5px;">(أبو الهول)</span>
+                </div>
+
+                <div class="clock-container">
+                    <i class="fas fa-clock clock-icon"></i>
+                    <div class="clock-content">
+                        <div class="clock-time" id="clock-time">--:-- --</div>
+                        <div class="clock-date" id="clock-date">--/--/----</div>
+                        <div class="clock-season" id="clock-season">
+                            <i class="fas fa-sun"></i>
+                            <span id="season-text">توقيت مصر</span>
+                        </div>
+                    </div>
+                    <div class="clock-controls">
+                        <select class="timezone-select" id="timezone-select">
+                            <option value="egypt">توقيت مصر</option>
+                            <option value="saudi">توقيت السعودية</option>
+                            <option value="uae">توقيت الإمارات</option>
+                            <option value="kuwait">توقيت الكويت</option>
+                            <option value="qatar">توقيت قطر</option>
+                            <option value="oman">توقيت عمان</option>
+                            <option value="gmt">توقيت غرينتش</option>
+                            <option value="est">توقيت نيويورك</option>
+                        </select>
+                        <div class="timezone-info" id="timezone-info">UTC+2</div>
+                    </div>
+                </div>
+
+                <div class="search-container">
+                    <input type="text" class="search-input" id="search-input"
+                        placeholder="ابحث عن معلم أثري، خدمة، رصيد، أو أي شيء...">
+                    <button class="search-button" id="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="search-results" id="search-results"></div>
+                </div>
+
+                <nav>
+                    <ul>
+                        <li><a href="#home" class="nav-link active" data-section="home">الرئيسية</a></li>
+                        <li><a href="#sites" class="nav-link" data-section="sites">المعالم الأثرية</a></li>
+                        <li><a href="#kings" class="nav-link" data-section="kings">ملوك مصر</a></li>
+                        <li><a href="#challenges" class="nav-link" data-section="challenges">اختبارات وتحديات</a></li>
+                        <li><a href="#wallet" class="nav-link" data-section="wallet">المحفظة</a></li>
+                        <li><a href="#booking" class="nav-link" data-section="booking">حجز رحلة</a></li>
+                        <li><a href="#contact" class="nav-link" data-section="contact">اتصل بنا</a></li>
+                        <li>
+                            <button class="theme-toggle" id="theme-toggle">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero active" id="home-section">
+        <div class="container">
+            <h1 class="glow-effect">SPHINX (أبو الهول)</h1>
+            <p>اكتشف عظمة الحضارة الفرعونية مع أبو الهول - دليلك إلى كنوز مصر القديمة</p>
+            <a href="#booking" class="btn nav-link" data-section="booking">احجز رحلتك الآن</a>
+        </div>
+    </section>
+
+    <section id="sites-section">
+        <div class="container">
+            <h2 class="section-title">المعالم الأثرية</h2>
+            <div class="sites-grid" id="sites-container"></div>
+        </div>
+    </section>
+
+    <section id="kings-section">
+        <div class="container">
+            <h2 class="section-title">ملوك مصر الفرعونية</h2>
+            <div class="sites-grid" id="kings-container"></div>
+        </div>
+    </section>
+
+    <section id="challenges-section" class="challenges-section">
+        <div class="container">
+            <h2 class="section-title">اختبارات وتحديات</h2>
+            <p
+                style="text-align: center; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                اختبر معلوماتك عن الحضارة الفرعونية واربح نقاطاً وشارات! كلما زادت معرفتك، زادت مكافآتك.
+            </p>
+
+            <div class="challenges-container" id="challenges-container"></div>
+
+            <div class="quiz-container" id="quiz-container"></div>
+
+            <div class="achievements-section">
+                <h3 class="section-title">إنجازاتي</h3>
+                <div class="achievements-grid" id="achievements-container"></div>
+            </div>
+
+            <div class="leaderboard-section">
+                <h3 class="section-title">لوحة المتصدرين</h3>
+                <div class="leaderboard-table">
+                    <div class="leaderboard-header">
+                        <div>الترتيب</div>
+                        <div>المستخدم</div>
+                        <div>النقاط</div>
+                        <div>الشارات</div>
+                    </div>
+                    <div id="leaderboard-body"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="wallet-section">
+        <div class="container">
+            <div class="wallet-section-main">
+                <div class="wallet-header-main">
+                    <h2><i class="fas fa-wallet"></i> محفظتي الإلكترونية</h2>
+                    <span class="wallet-status">نشطة</span>
+                </div>
+
+                <div class="security-status inactive" id="security-status">
+                    <i class="fas fa-shield-alt"></i>
+                    <div>
+                        <div>حماية المحفظة: <strong>غير مفعلة</strong></div>
+                        <div style="font-size: 0.85rem; opacity: 0.8;">أنشئ كلمة مرور لحماية أموالك</div>
+                    </div>
+                </div>
+
+                <div class="wallet-balance-main">
+                    <p>رصيدك الحالي</p>
+                    <div class="balance-amount-main" id="balance-amount-main">0 جنيه</div>
+                    <p>آخر تحديث: <span id="balance-update-time">اليوم</span></p>
+                </div>
+
+                <div class="wallet-actions-main">
+                    <div class="wallet-action-main glow-effect" id="add-funds-main">
+                        <i class="fas fa-plus-circle"></i>
+                        <p>إضافة رصيد</p>
+                    </div>
+                    <div class="wallet-action-main glow-effect" id="withdraw-funds-main">
+                        <i class="fas fa-minus-circle"></i>
+                        <p>سحب رصيد</p>
+                    </div>
+                    <div class="wallet-action-main glow-effect" id="transfer-funds-main">
+                        <i class="fas fa-exchange-alt"></i>
+                        <p>تحويل أموال</p>
+                    </div>
+                    <div class="wallet-action-main glow-effect" id="transaction-history-main">
+                        <i class="fas fa-history"></i>
+                        <p>سجل المعاملات</p>
+                    </div>
+                    <div class="wallet-action-main glow-effect" id="setup-password-main">
+                        <i class="fas fa-key"></i>
+                        <p>إنشاء كلمة مرور</p>
+                    </div>
+                    <div class="wallet-action-main glow-effect" id="change-password-main">
+                        <i class="fas fa-lock"></i>
+                        <p>تغيير كلمة المرور</p>
+                    </div>
+                    <div class="wallet-action-main glow-effect" id="reset-balance-main">
+                        <i class="fas fa-redo"></i>
+                        <p>إعادة تعيين الرصيد</p>
+                    </div>
+                </div>
+
+                <div class="transaction-history-main">
+                    <h3><i class="fas fa-receipt"></i> آخر المعاملات</h3>
+                    <div class="transaction-list" id="transaction-list"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking-section" class="booking-section">
+        <div class="container">
+            <h2 class="section-title">حجز رحلة</h2>
+            <div class="booking-form">
+                <form id="booking-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="booking-name"><i class="fas fa-user"></i> اسم صاحب الحجز</label>
+                            <input type="text" class="form-control" id="booking-name" placeholder="أدخل الاسم الكامل"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="booking-phone"><i class="fas fa-phone"></i> رقم صاحب الحجز</label>
+                            <input type="tel" class="form-control" id="booking-phone" placeholder="أدخل رقم الهاتف"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="national-id"><i class="fas fa-id-card"></i> الرقم القومي/البطاقة</label>
+                            <input type="text" class="form-control" id="national-id" placeholder="أدخل الرقم القومي"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="site"><i class="fas fa-map-marker-alt"></i> اختر المعلم الأثري</label>
+                            <select class="form-control" id="site" required>
+                                <option value="">-- اختر المعلم الأثري --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date"><i class="fas fa-calendar-alt"></i> تاريخ الزيارة</label>
+                            <input type="date" class="form-control" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="visitors"><i class="fas fa-users"></i> عدد الزوار</label>
+                            <input type="number" class="form-control" id="visitors" min="1" max="20" value="1" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="duration"><i class="fas fa-clock"></i> مدة الزيارة (ساعات)</label>
+                            <select class="form-control" id="duration" required>
+                                <option value="2">ساعتين</option>
+                                <option value="3">3 ساعات</option>
+                                <option value="4" selected>4 ساعات</option>
+                                <option value="5">5 ساعات</option>
+                                <option value="6">6 ساعات</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-passport"></i> نوع الزائر</label>
+                            <div style="display: flex; gap: 1rem; margin-top: 10px;">
+                                <div style="display: flex; align-items: center;">
+                                    <input type="radio" id="visitor-type-egyptian" name="visitor-type" value="egyptian"
+                                        checked>
+                                    <label for="visitor-type-egyptian" style="margin-right: 5px;">زائر مصري</label>
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <input type="radio" id="visitor-type-foreign" name="visitor-type" value="foreign">
+                                    <label for="visitor-type-foreign" style="margin-right: 5px;">زائر أجنبي</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-concierge-bell"></i> الخدمات الإضافية</label>
+                        <div class="services-list">
+                            <div class="service-item">
+                                <input type="checkbox" id="guide" value="200">
+                                <label for="guide"><i class="fas fa-user-tie"></i> مرشد سياحي (200 جنيه)</label>
+                            </div>
+                            <div class="service-item">
+                                <input type="checkbox" id="transport" value="150">
+                                <label for="transport"><i class="fas fa-car"></i> مواصلات من الفندق (150 جنيه)</label>
+                            </div>
+                            <div class="service-item">
+                                <input type="checkbox" id="lunch" value="100">
+                                <label for="lunch"><i class="fas fa-utensils"></i> وجبة غداء (100 جنيه/شخص)</label>
+                            </div>
+                            <div class="service-item">
+                                <input type="checkbox" id="photo" value="50">
+                                <label for="photo"><i class="fas fa-camera"></i> خدمة التصوير (50 جنيه)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-summary">
+                        <h3><i class="fas fa-receipt"></i> ملخص التكلفة</h3>
+                        <div class="price-item">
+                            <span>عدد الزوار:</span>
+                            <span id="visitors-count">1</span>
+                        </div>
+                        <div class="price-item">
+                            <span>سعر التذكرة للزائر الواحد:</span>
+                            <span id="ticket-price-per-person">0 جنيه</span>
+                        </div>
+                        <div class="price-item">
+                            <span>السعر الإجمالي للتذاكر:</span>
+                            <span id="ticket-price-total">0 جنيه</span>
+                        </div>
+                        <div class="price-item">
+                            <span>الخدمات الإضافية:</span>
+                            <span id="services-price">0 جنيه</span>
+                        </div>
+                        <div class="price-item price-total">
+                            <span>الإجمالي:</span>
+                            <span id="total-price">0 جنيه</span>
+                        </div>
+                        <div
+                            style="margin-top: 10px; font-size: 0.85rem; color: var(--secondary-color); text-align: center;">
+                            <i class="fas fa-info-circle"></i> ملاحظة: الأسعار الموضحة للمصريين/الأجانب قد تختلف
+                        </div>
+                    </div>
+
+                    <div class="wallet-section">
+                        <h3><i class="fas fa-wallet"></i> طريقة الدفع</h3>
+                        <div class="payment-options">
+                            <div class="payment-option glow-effect" data-method="wallet">
+                                <i class="fas fa-wallet"></i>
+                                <p>المحفظة الإلكترونية</p>
+                                <span class="payment-badge">مفضلة</span>
+                            </div>
+                            <div class="payment-option glow-effect" data-method="visa">
+                                <i class="fab fa-cc-visa"></i>
+                                <p>بطاقة فيزا</p>
+                            </div>
+                            <div class="payment-option glow-effect" data-method="mastercard">
+                                <i class="fab fa-cc-mastercard"></i>
+                                <p>ماستركارد</p>
+                            </div>
+                            <div class="payment-option glow-effect" data-method="paypal">
+                                <i class="fab fa-cc-paypal"></i>
+                                <p>باي بال</p>
+                            </div>
+                            <div class="payment-option glow-effect" data-method="mada">
+                                <i class="fas fa-credit-card"></i>
+                                <p>مدى</p>
+                            </div>
+                            <div class="payment-option glow-effect" data-method="applepay">
+                                <i class="fab fa-apple-pay"></i>
+                                <p>آبل باي</p>
+                            </div>
+                            <div class="payment-option glow-effect" data-method="googlepay">
+                                <i class="fab fa-google-pay"></i>
+                                <p>جوجل باي</p>
+                            </div>
+                            <div class="payment-option glow-effect" data-method="stcpay">
+                                <i class="fas fa-mobile-alt"></i>
+                                <p>STC Pay</p>
+                            </div>
+                            <div class="payment-option glow-effect" data-method="banktransfer">
+                                <i class="fas fa-university"></i>
+                                <p>تحويل بنكي</p>
+                            </div>
+                            <div class="payment-option glow-effect" data-method="vodafonecash">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <p>فودافون كاش</p>
+                            </div>
+                            <div class="payment-option glow-effect" data-method="orangecash">
+                                <i class="fas fa-money-bill-alt"></i>
+                                <p>أورانج كاش</p>
+                            </div>
+                            <div class="payment-option glow-effect" data-method="etisalatcash">
+                                <i class="fas fa-coins"></i>
+                                <p>اتصالات كاش</p>
+                            </div>
+                        </div>
+
+                        <div class="payment-details" id="card-details">
+                            <h4><i class="fas fa-credit-card"></i> تفاصيل البطاقة</h4>
+                            <div class="card-preview">
+                                <div class="card-chip"></div>
+                                <div class="card-number" id="card-preview-number">**** **** **** ****</div>
+                                <div class="card-info">
+                                    <div class="card-holder" id="card-preview-holder">اسم حامل البطاقة</div>
+                                    <div class="card-expiry" id="card-preview-expiry">MM/YY</div>
+                                </div>
+                                <div class="card-logo" id="card-preview-logo">VISA</div>
+                            </div>
+                            <div class="card-input">
+                                <div class="form-group">
+                                    <label for="card-number">رقم البطاقة</label>
+                                    <input type="text" class="form-control" id="card-number"
+                                        placeholder="1234 5678 9012 3456" maxlength="19">
+                                </div>
+                                <div class="form-group">
+                                    <label for="card-holder">اسم حامل البطاقة</label>
+                                    <input type="text" class="form-control" id="card-holder"
+                                        placeholder="اسم حامل البطاقة">
+                                </div>
+                                <div class="card-row">
+                                    <div class="form-group">
+                                        <label for="card-expiry">تاريخ الانتهاء</label>
+                                        <input type="text" class="form-control" id="card-expiry" placeholder="MM/YY"
+                                            maxlength="5">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="card-cvv">CVV</label>
+                                        <input type="text" class="form-control" id="card-cvv" placeholder="123"
+                                            maxlength="3">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="payment-details" id="digital-details">
+                            <h4><i class="fas fa-mobile-alt"></i> الدفع الإلكتروني</h4>
+                            <div class="qr-payment">
+                                <div class="qr-code">
+                                    <i class="fas fa-qrcode"></i>
+                                </div>
+                                <p>امسح رمز QR لاستكمال عملية الدفع</p>
+                                <p style="font-size: 0.9rem; color: var(--secondary-color);">أو استخدم تطبيق الدفع
+                                    الإلكتروني الخاص بك</p>
+                            </div>
+                        </div>
+
+                        <div class="payment-details" id="installment-details">
+                            <h4><i class="fas fa-calendar-alt"></i> خيارات التقسيط</h4>
+                            <div class="installment-options">
+                                <div class="installment-option glow-effect" data-months="1">
+                                    <div class="installment-period">دفعة واحدة</div>
+                                    <div class="installment-amount" id="installment-amount-1">0 جنيه</div>
+                                </div>
+                                <div class="installment-option glow-effect" data-months="3">
+                                    <div class="installment-period">3 أشهر</div>
+                                    <div class="installment-amount" id="installment-amount-3">0 جنيه/شهر</div>
+                                </div>
+                                <div class="installment-option glow-effect" data-months="6">
+                                    <div class="installment-period">6 أشهر</div>
+                                    <div class="installment-amount" id="installment-amount-6">0 جنيه/شهر</div>
+                                </div>
+                                <div class="installment-option glow-effect" data-months="12">
+                                    <div class="installment-period">12 شهر</div>
+                                    <div class="installment-amount" id="installment-amount-12">0 جنيه/شهر</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-process" id="payment-process">
+                        <div class="payment-steps">
+                            <div class="payment-step active" id="step-1">
+                                <div class="step-number">1</div>
+                                <div class="step-label">تأكيد الدفع</div>
+                            </div>
+                            <div class="payment-step" id="step-2">
+                                <div class="step-number">2</div>
+                                <div class="step-label">معالجة الدفع</div>
+                            </div>
+                            <div class="payment-step" id="step-3">
+                                <div class="step-number">3</div>
+                                <div class="step-label">اكتمال العملية</div>
+                            </div>
+                        </div>
+
+                        <div class="payment-process-content" id="payment-process-content"></div>
+                    </div>
+
+                    <button type="submit" class="btn glow-effect" style="width: 100%; margin-top: 1.5rem;"
+                        id="submit-booking">
+                        <i class="fas fa-check-circle"></i> تأكيد الحجز والدفع
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact-section">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SPHINX (أبو الهول)</h3>
+                    <p>دليلك إلى كنوز مصر القديمة. نظم رحلاتك إلى الآثار الفرعونية بسهولة وأمان مع أفضل الخدمات وأسعار
+                        مناسبة.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#home" class="nav-link" data-section="home">الرئيسية</a></li>
+                        <li><a href="#sites" class="nav-link" data-section="sites">المعالم الأثرية</a></li>
+                        <li><a href="#kings" class="nav-link" data-section="kings">ملوك مصر</a></li>
+                        <li><a href="#challenges" class="nav-link" data-section="challenges">اختبارات وتحديات</a></li>
+                        <li><a href="#wallet" class="nav-link" data-section="wallet">المحفظة</a></li>
+                        <li><a href="#booking" class="nav-link" data-section="booking">حجز رحلة</a></li>
+                        <li><a href="#contact" class="nav-link" data-section="contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> الهاتف: 01234567890</li>
+                        <li><i class="fas fa-envelope"></i> البريد الإلكتروني: info@sphinx-egypt.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> العنوان: القاهرة، مصر</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2023 SPHINX (أبو الهول). جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="ai-assistant">
+        <div class="ai-toggle" id="ai-toggle">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="ai-chat" id="ai-chat">
+            <div class="ai-header">
+                <h3>
+                    <i class="fas fa-robot"></i>
+                    مساعد أبو الهول الذكي المتقدم
+                </h3>
+                <div class="ai-actions">
+                    <button class="ai-action-btn" id="ai-new-chat" title="محادثة جديدة">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="ai-action-btn" id="ai-clear-chat" title="مسح المحادثة">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <button class="ai-action-btn" id="ai-close-chat" title="إغلاق المحادثة">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="ai-messages" id="ai-messages">
+                <div class="message ai-message">
+                    <strong>مرحباً! أنا مساعد أبو الهول الذكي المتقدم 🏛️</strong>
+                    <br><br>
+                    يمكنني مساعدتك في:
+                    <br>• معلومات تفصيلية عن المعالم الأثرية المصرية
+                    <br>• تنظيم رحلات سياحية مخصصة
+                    <br>• إدارة محفظتك الإلكترونية
+                    <br>• الإجابة على أسئلتك التاريخية والثقافية
+                    <br>• مساعدتك في الترجمة والكتابة
+                    <br>• حل المشكلات التقنية
+                    <br><br>
+                    <em>كيف يمكنني مساعدتك اليوم؟</em>
+                    <div class="message-time" id="welcome-time"></div>
+                </div>
+            </div>
+            <div class="ai-features">
+                <div class="ai-feature" data-feature="plan_trip">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>تخطيط رحلة</span>
+                </div>
+                <div class="ai-feature" data-feature="history_info">
+                    <i class="fas fa-landmark"></i>
+                    <span>معلومات تاريخية</span>
+                </div>
+                <div class="ai-feature" data-feature="wallet_help">
+                    <i class="fas fa-wallet"></i>
+                    <span>مساعدة محفظة</span>
+                </div>
+                <div class="ai-feature" data-feature="translate">
+                    <i class="fas fa-language"></i>
+                    <span>ترجمة</span>
+                </div>
+            </div>
+            <div class="ai-suggestions" id="ai-suggestions">
+                <div class="ai-suggestion" data-suggestion="أخبرني عن تاريخ الأهرامات">تاريخ الأهرامات</div>
+                <div class="ai-suggestion" data-suggestion="كيف يمكنني تخطيط رحلة لمدة 3 أيام في مصر؟">تخطيط رحلة</div>
+                <div class="ai-suggestion" data-suggestion="ما هو رصيدي الحالي في المحفظة؟">رصيدي الحالي</div>
+                <div class="ai-suggestion" data-suggestion="ترجمة 'مرحباً' إلى الإنجليزية">ترجمة</div>
+            </div>
+            <div class="ai-input">
+                <input type="text" id="ai-input" placeholder="اكتب رسالتك هنا...">
+                <button id="ai-send"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="site-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">تفاصيل الموقع الأثري</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="king-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="king-modal-title">تفاصيل الملك</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="king-modal-body"></div>
+        </div>
+    </div>
+
+    <div class="modal password-modal" id="password-setup-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>إنشاء كلمة مرور للمحفظة</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="password-form">
+                    <p>لحماية أموالك، يمكنك إنشاء كلمة مرور للمحفظة الإلكترونية (اختياري).</p>
+                    <div class="form-group">
+                        <label for="new-password">كلمة المرور الجديدة</label>
+                        <div class="password-input-container">
+                            <input type="password" class="form-control" id="new-password"
+                                placeholder="أدخل كلمة مرور (اختياري)">
+                            <button type="button" class="toggle-password" id="toggle-new-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-requirements">
+                            <ul>
+                                <li id="req-length" class="valid"><i class="fas fa-check"></i> 4 أحرف على الأقل</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">تأكيد كلمة المرور</label>
+                        <div class="password-input-container">
+                            <input type="password" class="form-control" id="confirm-password"
+                                placeholder="أعد إدخال كلمة المرور">
+                            <button type="button" class="toggle-password" id="toggle-confirm-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div id="password-match" style="margin-top: 5px; font-size: 0.85rem;"></div>
+                    </div>
+                    <div class="security-questions">
+                        <div class="security-question">
+                            <label for="security-question">سؤال الأمان (اختياري)</label>
+                            <select class="form-control" id="security-question">
+                                <option value="">اختر سؤال الأمان (اختياري)</option>
+                                <option value="ما اسم والدتك قبل الزواج؟">ما اسم والدتك قبل الزواج؟</option>
+                                <option value="ما هو اسم مدرستك الابتدائية؟">ما هو اسم مدرستك الابتدائية؟</option>
+                                <option value="ما هو اسم حيوانك الأليف الأول؟">ما هو اسم حيوانك الأليف الأول؟</option>
+                                <option value="ما هو اسم أفضل صديق في الطفولة؟">ما هو اسم أفضل صديق في الطفولة؟</option>
+                                <option value="ما هو اسم المدينة التي ولدت فيها؟">ما هو اسم المدينة التي ولدت فيها؟
+                                </option>
+                            </select>
+                            <input type="text" class="form-control" id="security-answer" placeholder="الإجابة (اختياري)"
+                                style="margin-top: 5px;">
+                        </div>
+                    </div>
+                    <button class="btn" id="setup-password-btn" style="width: 100%; margin-top: 1.5rem;">إنشاء كلمة
+                        المرور</button>
+                    <button class="btn" id="skip-password-btn"
+                        style="width: 100%; margin-top: 0.5rem; background-color: transparent; border: 1px solid var(--primary-color); color: var(--primary-color);">تخطي
+                        الآن</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal password-modal" id="password-verify-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="password-verify-title">تأكيد كلمة المرور</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="password-form">
+                    <p id="password-verify-message">يرجى إدخال كلمة مرور المحفظة للموافقة على هذه المعاملة.</p>
+                    <div class="form-group">
+                        <label for="verify-password">كلمة المرور</label>
+                        <div class="password-input-container">
+                            <input type="password" class="form-control" id="verify-password"
+                                placeholder="أدخل كلمة مرور المحفظة">
+                            <button type="button" class="toggle-password" id="toggle-verify-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="password-error" style="color: #f44336; margin-top: 10px; display: none;">
+                        <i class="fas fa-exclamation-circle"></i> كلمة المرور غير صحيحة
+                    </div>
+                    <button class="btn" id="verify-password-btn" style="width: 100%; margin-top: 1.5rem;">تأكيد</button>
+                    <p style="text-align: center; margin-top: 15px;">
+                        <a href="#" id="forgot-password-link">نسيت كلمة المرور؟</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal password-modal" id="password-recovery-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>استعادة كلمة المرور</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="password-form">
+                    <p>لإعادة تعيين كلمة مرور المحفظة، يرجى الإجابة على سؤال الأمان التالي:</p>
+                    <div class="form-group">
+                        <label id="recovery-question"></label>
+                        <input type="text" class="form-control" id="recovery-answer" placeholder="الإجابة">
+                    </div>
+                    <div id="recovery-error" style="color: #f44336; margin-top: 10px; display: none;">
+                        <i class="fas fa-exclamation-circle"></i> إجابة غير صحيحة
+                    </div>
+                    <button class="btn" id="verify-recovery-btn"
+                        style="width: 100%; margin-top: 1.5rem;">التحقق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal password-modal" id="change-password-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>تغيير كلمة المرور</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="password-form">
+                    <div class="form-group">
+                        <label for="current-password">كلمة المرور الحالية</label>
+                        <div class="password-input-container">
+                            <input type="password" class="form-control" id="current-password"
+                                placeholder="أدخل كلمة المرور الحالية">
+                            <button type="button" class="toggle-password" id="toggle-current-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password-change">كلمة المرور الجديدة</label>
+                        <div class="password-input-container">
+                            <input type="password" class="form-control" id="new-password-change"
+                                placeholder="أدخل كلمة مرور جديدة">
+                            <button type="button" class="toggle-password" id="toggle-new-password-change">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-requirements">
+                            <ul>
+                                <li id="req-length-change" class="valid"><i class="fas fa-check"></i> 4 أحرف على الأقل
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password-change">تأكيد كلمة المرور الجديدة</label>
+                        <div class="password-input-container">
+                            <input type="password" class="form-control" id="confirm-password-change"
+                                placeholder="أعد إدخال كلمة المرور الجديدة">
+                            <button type="button" class="toggle-password" id="toggle-confirm-password-change">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div id="password-match-change" style="margin-top: 5px; font-size: 0.85rem;"></div>
+                    </div>
+                    <div id="change-password-error" style="color: #f44336; margin-top: 10px; display: none;">
+                        <i class="fas fa-exclamation-circle"></i> كلمة المرور الحالية غير صحيحة
+                    </div>
+                    <button class="btn" id="change-password-btn" style="width: 100%; margin-top: 1.5rem;">تغيير كلمة
+                        المرور</button>
+                    <button class="btn" id="remove-password-btn"
+                        style="width: 100%; margin-top: 0.5rem; background-color: transparent; border: 1px solid #f44336; color: #f44336;">إزالة
+                        كلمة المرور</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal password-modal" id="reset-balance-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>إعادة تعيين الرصيد</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="password-form">
+                    <p>هل أنت متأكد من أنك تريد إعادة تعيين رصيد محفظتك إلى الصفر؟</p>
+                    <p style="color: #f44336; font-weight: bold;">هذا الإجراء لا يمكن التراجع عنه!</p>
+                    <div class="form-group">
+                        <label for="reset-confirm">اكتب "نعم" للتأكيد:</label>
+                        <input type="text" class="form-control" id="reset-confirm" placeholder="اكتب 'نعم' هنا">
+                    </div>
+                    <div id="reset-error" style="color: #f44336; margin-top: 10px; display: none;">
+                        <i class="fas fa-exclamation-circle"></i> يجب كتابة "نعم" للتأكيد
+                    </div>
+                    <button class="btn" id="confirm-reset-btn"
+                        style="width: 100%; margin-top: 1.5rem; background-color: #f44336;">إعادة تعيين الرصيد</button>
+                    <button class="btn" id="cancel-reset-btn"
+                        style="width: 100%; margin-top: 0.5rem; background-color: transparent; border: 1px solid var(--primary-color); color: var(--primary-color);">إلغاء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
