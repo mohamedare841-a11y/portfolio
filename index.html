@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPHINX - أبو الهول | رحلات الآثار الفرعونية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
     <div class="parallax-bg"></div>
-
+    
     <div class="floating-elements">
         <div class="floating-element"></div>
         <div class="floating-element"></div>
@@ -19,16 +17,16 @@
         <div class="floating-element"></div>
         <div class="floating-element"></div>
     </div>
-
+    
     <div class="morphing-shapes">
         <div class="morphing-shape"></div>
         <div class="morphing-shape"></div>
         <div class="morphing-shape"></div>
         <div class="morphing-shape"></div>
     </div>
-
+    
     <div class="particle-container" id="particle-container"></div>
-
+    
     <div class="hieroglyph">𓀀</div>
     <div class="hieroglyph">𓀁</div>
     <div class="hieroglyph">𓀂</div>
@@ -43,7 +41,7 @@
                     <div class="sphinx-icon"></div>
                     SPHINX <span style="font-size: 1rem; margin-right: 5px;">(أبو الهول)</span>
                 </div>
-
+                
                 <div class="clock-container">
                     <i class="fas fa-clock clock-icon"></i>
                     <div class="clock-content">
@@ -68,16 +66,15 @@
                         <div class="timezone-info" id="timezone-info">UTC+2</div>
                     </div>
                 </div>
-
+                
                 <div class="search-container">
-                    <input type="text" class="search-input" id="search-input"
-                        placeholder="ابحث عن معلم أثري، خدمة، رصيد، أو أي شيء...">
+                    <input type="text" class="search-input" id="search-input" placeholder="ابحث عن معلم أثري، خدمة، رصيد، أو أي شيء...">
                     <button class="search-button" id="search-button">
                         <i class="fas fa-search"></i>
                     </button>
                     <div class="search-results" id="search-results"></div>
                 </div>
-
+                
                 <nav>
                     <ul>
                         <li><a href="#home" class="nav-link active" data-section="home">الرئيسية</a></li>
@@ -123,20 +120,19 @@
     <section id="challenges-section" class="challenges-section">
         <div class="container">
             <h2 class="section-title">اختبارات وتحديات</h2>
-            <p
-                style="text-align: center; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <p style="text-align: center; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
                 اختبر معلوماتك عن الحضارة الفرعونية واربح نقاطاً وشارات! كلما زادت معرفتك، زادت مكافآتك.
             </p>
-
+            
             <div class="challenges-container" id="challenges-container"></div>
-
+            
             <div class="quiz-container" id="quiz-container"></div>
-
+            
             <div class="achievements-section">
                 <h3 class="section-title">إنجازاتي</h3>
                 <div class="achievements-grid" id="achievements-container"></div>
             </div>
-
+            
             <div class="leaderboard-section">
                 <h3 class="section-title">لوحة المتصدرين</h3>
                 <div class="leaderboard-table">
@@ -159,7 +155,7 @@
                     <h2><i class="fas fa-wallet"></i> محفظتي الإلكترونية</h2>
                     <span class="wallet-status">نشطة</span>
                 </div>
-
+                
                 <div class="security-status inactive" id="security-status">
                     <i class="fas fa-shield-alt"></i>
                     <div>
@@ -167,13 +163,13 @@
                         <div style="font-size: 0.85rem; opacity: 0.8;">أنشئ كلمة مرور لحماية أموالك</div>
                     </div>
                 </div>
-
+                
                 <div class="wallet-balance-main">
                     <p>رصيدك الحالي</p>
                     <div class="balance-amount-main" id="balance-amount-main">0 جنيه</div>
                     <p>آخر تحديث: <span id="balance-update-time">اليوم</span></p>
                 </div>
-
+                
                 <div class="wallet-actions-main">
                     <div class="wallet-action-main glow-effect" id="add-funds-main">
                         <i class="fas fa-plus-circle"></i>
@@ -204,7 +200,7 @@
                         <p>إعادة تعيين الرصيد</p>
                     </div>
                 </div>
-
+                
                 <div class="transaction-history-main">
                     <h3><i class="fas fa-receipt"></i> آخر المعاملات</h3>
                     <div class="transaction-list" id="transaction-list"></div>
@@ -221,21 +217,18 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="booking-name"><i class="fas fa-user"></i> اسم صاحب الحجز</label>
-                            <input type="text" class="form-control" id="booking-name" placeholder="أدخل الاسم الكامل"
-                                required>
+                            <input type="text" class="form-control" id="booking-name" placeholder="أدخل الاسم الكامل" required>
                         </div>
                         <div class="form-group">
                             <label for="booking-phone"><i class="fas fa-phone"></i> رقم صاحب الحجز</label>
-                            <input type="tel" class="form-control" id="booking-phone" placeholder="أدخل رقم الهاتف"
-                                required>
+                            <input type="tel" class="form-control" id="booking-phone" placeholder="أدخل رقم الهاتف" required>
                         </div>
                     </div>
-
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="national-id"><i class="fas fa-id-card"></i> الرقم القومي/البطاقة</label>
-                            <input type="text" class="form-control" id="national-id" placeholder="أدخل الرقم القومي"
-                                required>
+                            <input type="text" class="form-control" id="national-id" placeholder="أدخل الرقم القومي" required>
                         </div>
                         <div class="form-group">
                             <label for="site"><i class="fas fa-map-marker-alt"></i> اختر المعلم الأثري</label>
@@ -244,7 +237,7 @@
                             </select>
                         </div>
                     </div>
-
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="date"><i class="fas fa-calendar-alt"></i> تاريخ الزيارة</label>
@@ -255,7 +248,7 @@
                             <input type="number" class="form-control" id="visitors" min="1" max="20" value="1" required>
                         </div>
                     </div>
-
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="duration"><i class="fas fa-clock"></i> مدة الزيارة (ساعات)</label>
@@ -271,8 +264,7 @@
                             <label><i class="fas fa-passport"></i> نوع الزائر</label>
                             <div style="display: flex; gap: 1rem; margin-top: 10px;">
                                 <div style="display: flex; align-items: center;">
-                                    <input type="radio" id="visitor-type-egyptian" name="visitor-type" value="egyptian"
-                                        checked>
+                                    <input type="radio" id="visitor-type-egyptian" name="visitor-type" value="egyptian" checked>
                                     <label for="visitor-type-egyptian" style="margin-right: 5px;">زائر مصري</label>
                                 </div>
                                 <div style="display: flex; align-items: center;">
@@ -282,7 +274,7 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="form-group">
                         <label><i class="fas fa-concierge-bell"></i> الخدمات الإضافية</label>
                         <div class="services-list">
@@ -304,7 +296,7 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="price-summary">
                         <h3><i class="fas fa-receipt"></i> ملخص التكلفة</h3>
                         <div class="price-item">
@@ -327,12 +319,11 @@
                             <span>الإجمالي:</span>
                             <span id="total-price">0 جنيه</span>
                         </div>
-                        <div
-                            style="margin-top: 10px; font-size: 0.85rem; color: var(--secondary-color); text-align: center;">
+                        <div style="margin-top: 10px; font-size: 0.85rem; color: var(--secondary-color); text-align: center;">
                             <i class="fas fa-info-circle"></i> ملاحظة: الأسعار الموضحة للمصريين/الأجانب قد تختلف
                         </div>
                     </div>
-
+                    
                     <div class="wallet-section">
                         <h3><i class="fas fa-wallet"></i> طريقة الدفع</h3>
                         <div class="payment-options">
@@ -386,7 +377,7 @@
                                 <p>اتصالات كاش</p>
                             </div>
                         </div>
-
+                        
                         <div class="payment-details" id="card-details">
                             <h4><i class="fas fa-credit-card"></i> تفاصيل البطاقة</h4>
                             <div class="card-preview">
@@ -401,29 +392,25 @@
                             <div class="card-input">
                                 <div class="form-group">
                                     <label for="card-number">رقم البطاقة</label>
-                                    <input type="text" class="form-control" id="card-number"
-                                        placeholder="1234 5678 9012 3456" maxlength="19">
+                                    <input type="text" class="form-control" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
                                 </div>
                                 <div class="form-group">
                                     <label for="card-holder">اسم حامل البطاقة</label>
-                                    <input type="text" class="form-control" id="card-holder"
-                                        placeholder="اسم حامل البطاقة">
+                                    <input type="text" class="form-control" id="card-holder" placeholder="اسم حامل البطاقة">
                                 </div>
                                 <div class="card-row">
                                     <div class="form-group">
                                         <label for="card-expiry">تاريخ الانتهاء</label>
-                                        <input type="text" class="form-control" id="card-expiry" placeholder="MM/YY"
-                                            maxlength="5">
+                                        <input type="text" class="form-control" id="card-expiry" placeholder="MM/YY" maxlength="5">
                                     </div>
                                     <div class="form-group">
                                         <label for="card-cvv">CVV</label>
-                                        <input type="text" class="form-control" id="card-cvv" placeholder="123"
-                                            maxlength="3">
+                                        <input type="text" class="form-control" id="card-cvv" placeholder="123" maxlength="3">
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div class="payment-details" id="digital-details">
                             <h4><i class="fas fa-mobile-alt"></i> الدفع الإلكتروني</h4>
                             <div class="qr-payment">
@@ -431,11 +418,10 @@
                                     <i class="fas fa-qrcode"></i>
                                 </div>
                                 <p>امسح رمز QR لاستكمال عملية الدفع</p>
-                                <p style="font-size: 0.9rem; color: var(--secondary-color);">أو استخدم تطبيق الدفع
-                                    الإلكتروني الخاص بك</p>
+                                <p style="font-size: 0.9rem; color: var(--secondary-color);">أو استخدم تطبيق الدفع الإلكتروني الخاص بك</p>
                             </div>
                         </div>
-
+                        
                         <div class="payment-details" id="installment-details">
                             <h4><i class="fas fa-calendar-alt"></i> خيارات التقسيط</h4>
                             <div class="installment-options">
@@ -458,7 +444,7 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="payment-process" id="payment-process">
                         <div class="payment-steps">
                             <div class="payment-step active" id="step-1">
@@ -474,12 +460,11 @@
                                 <div class="step-label">اكتمال العملية</div>
                             </div>
                         </div>
-
+                        
                         <div class="payment-process-content" id="payment-process-content"></div>
                     </div>
-
-                    <button type="submit" class="btn glow-effect" style="width: 100%; margin-top: 1.5rem;"
-                        id="submit-booking">
+                    
+                    <button type="submit" class="btn glow-effect" style="width: 100%; margin-top: 1.5rem;" id="submit-booking">
                         <i class="fas fa-check-circle"></i> تأكيد الحجز والدفع
                     </button>
                 </form>
@@ -492,8 +477,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>SPHINX (أبو الهول)</h3>
-                    <p>دليلك إلى كنوز مصر القديمة. نظم رحلاتك إلى الآثار الفرعونية بسهولة وأمان مع أفضل الخدمات وأسعار
-                        مناسبة.</p>
+                    <p>دليلك إلى كنوز مصر القديمة. نظم رحلاتك إلى الآثار الفرعونية بسهولة وأمان مع أفضل الخدمات وأسعار مناسبة.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -629,8 +613,7 @@
                     <div class="form-group">
                         <label for="new-password">كلمة المرور الجديدة</label>
                         <div class="password-input-container">
-                            <input type="password" class="form-control" id="new-password"
-                                placeholder="أدخل كلمة مرور (اختياري)">
+                            <input type="password" class="form-control" id="new-password" placeholder="أدخل كلمة مرور (اختياري)">
                             <button type="button" class="toggle-password" id="toggle-new-password">
                                 <i class="fas fa-eye"></i>
                             </button>
@@ -644,8 +627,7 @@
                     <div class="form-group">
                         <label for="confirm-password">تأكيد كلمة المرور</label>
                         <div class="password-input-container">
-                            <input type="password" class="form-control" id="confirm-password"
-                                placeholder="أعد إدخال كلمة المرور">
+                            <input type="password" class="form-control" id="confirm-password" placeholder="أعد إدخال كلمة المرور">
                             <button type="button" class="toggle-password" id="toggle-confirm-password">
                                 <i class="fas fa-eye"></i>
                             </button>
@@ -661,18 +643,13 @@
                                 <option value="ما هو اسم مدرستك الابتدائية؟">ما هو اسم مدرستك الابتدائية؟</option>
                                 <option value="ما هو اسم حيوانك الأليف الأول؟">ما هو اسم حيوانك الأليف الأول؟</option>
                                 <option value="ما هو اسم أفضل صديق في الطفولة؟">ما هو اسم أفضل صديق في الطفولة؟</option>
-                                <option value="ما هو اسم المدينة التي ولدت فيها؟">ما هو اسم المدينة التي ولدت فيها؟
-                                </option>
+                                <option value="ما هو اسم المدينة التي ولدت فيها؟">ما هو اسم المدينة التي ولدت فيها؟</option>
                             </select>
-                            <input type="text" class="form-control" id="security-answer" placeholder="الإجابة (اختياري)"
-                                style="margin-top: 5px;">
+                            <input type="text" class="form-control" id="security-answer" placeholder="الإجابة (اختياري)" style="margin-top: 5px;">
                         </div>
                     </div>
-                    <button class="btn" id="setup-password-btn" style="width: 100%; margin-top: 1.5rem;">إنشاء كلمة
-                        المرور</button>
-                    <button class="btn" id="skip-password-btn"
-                        style="width: 100%; margin-top: 0.5rem; background-color: transparent; border: 1px solid var(--primary-color); color: var(--primary-color);">تخطي
-                        الآن</button>
+                    <button class="btn" id="setup-password-btn" style="width: 100%; margin-top: 1.5rem;">إنشاء كلمة المرور</button>
+                    <button class="btn" id="skip-password-btn" style="width: 100%; margin-top: 0.5rem; background-color: transparent; border: 1px solid var(--primary-color); color: var(--primary-color);">تخطي الآن</button>
                 </div>
             </div>
         </div>
@@ -690,8 +667,7 @@
                     <div class="form-group">
                         <label for="verify-password">كلمة المرور</label>
                         <div class="password-input-container">
-                            <input type="password" class="form-control" id="verify-password"
-                                placeholder="أدخل كلمة مرور المحفظة">
+                            <input type="password" class="form-control" id="verify-password" placeholder="أدخل كلمة مرور المحفظة">
                             <button type="button" class="toggle-password" id="toggle-verify-password">
                                 <i class="fas fa-eye"></i>
                             </button>
@@ -725,8 +701,7 @@
                     <div id="recovery-error" style="color: #f44336; margin-top: 10px; display: none;">
                         <i class="fas fa-exclamation-circle"></i> إجابة غير صحيحة
                     </div>
-                    <button class="btn" id="verify-recovery-btn"
-                        style="width: 100%; margin-top: 1.5rem;">التحقق</button>
+                    <button class="btn" id="verify-recovery-btn" style="width: 100%; margin-top: 1.5rem;">التحقق</button>
                 </div>
             </div>
         </div>
@@ -743,8 +718,7 @@
                     <div class="form-group">
                         <label for="current-password">كلمة المرور الحالية</label>
                         <div class="password-input-container">
-                            <input type="password" class="form-control" id="current-password"
-                                placeholder="أدخل كلمة المرور الحالية">
+                            <input type="password" class="form-control" id="current-password" placeholder="أدخل كلمة المرور الحالية">
                             <button type="button" class="toggle-password" id="toggle-current-password">
                                 <i class="fas fa-eye"></i>
                             </button>
@@ -753,24 +727,21 @@
                     <div class="form-group">
                         <label for="new-password-change">كلمة المرور الجديدة</label>
                         <div class="password-input-container">
-                            <input type="password" class="form-control" id="new-password-change"
-                                placeholder="أدخل كلمة مرور جديدة">
+                            <input type="password" class="form-control" id="new-password-change" placeholder="أدخل كلمة مرور جديدة">
                             <button type="button" class="toggle-password" id="toggle-new-password-change">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
                         <div class="password-requirements">
                             <ul>
-                                <li id="req-length-change" class="valid"><i class="fas fa-check"></i> 4 أحرف على الأقل
-                                </li>
+                                <li id="req-length-change" class="valid"><i class="fas fa-check"></i> 4 أحرف على الأقل</li>
                             </ul>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="confirm-password-change">تأكيد كلمة المرور الجديدة</label>
                         <div class="password-input-container">
-                            <input type="password" class="form-control" id="confirm-password-change"
-                                placeholder="أعد إدخال كلمة المرور الجديدة">
+                            <input type="password" class="form-control" id="confirm-password-change" placeholder="أعد إدخال كلمة المرور الجديدة">
                             <button type="button" class="toggle-password" id="toggle-confirm-password-change">
                                 <i class="fas fa-eye"></i>
                             </button>
@@ -780,11 +751,8 @@
                     <div id="change-password-error" style="color: #f44336; margin-top: 10px; display: none;">
                         <i class="fas fa-exclamation-circle"></i> كلمة المرور الحالية غير صحيحة
                     </div>
-                    <button class="btn" id="change-password-btn" style="width: 100%; margin-top: 1.5rem;">تغيير كلمة
-                        المرور</button>
-                    <button class="btn" id="remove-password-btn"
-                        style="width: 100%; margin-top: 0.5rem; background-color: transparent; border: 1px solid #f44336; color: #f44336;">إزالة
-                        كلمة المرور</button>
+                    <button class="btn" id="change-password-btn" style="width: 100%; margin-top: 1.5rem;">تغيير كلمة المرور</button>
+                    <button class="btn" id="remove-password-btn" style="width: 100%; margin-top: 0.5rem; background-color: transparent; border: 1px solid #f44336; color: #f44336;">إزالة كلمة المرور</button>
                 </div>
             </div>
         </div>
@@ -807,10 +775,8 @@
                     <div id="reset-error" style="color: #f44336; margin-top: 10px; display: none;">
                         <i class="fas fa-exclamation-circle"></i> يجب كتابة "نعم" للتأكيد
                     </div>
-                    <button class="btn" id="confirm-reset-btn"
-                        style="width: 100%; margin-top: 1.5rem; background-color: #f44336;">إعادة تعيين الرصيد</button>
-                    <button class="btn" id="cancel-reset-btn"
-                        style="width: 100%; margin-top: 0.5rem; background-color: transparent; border: 1px solid var(--primary-color); color: var(--primary-color);">إلغاء</button>
+                    <button class="btn" id="confirm-reset-btn" style="width: 100%; margin-top: 1.5rem; background-color: #f44336;">إعادة تعيين الرصيد</button>
+                    <button class="btn" id="cancel-reset-btn" style="width: 100%; margin-top: 0.5rem; background-color: transparent; border: 1px solid var(--primary-color); color: var(--primary-color);">إلغاء</button>
                 </div>
             </div>
         </div>
@@ -822,5 +788,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>

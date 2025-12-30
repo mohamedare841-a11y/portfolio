@@ -81,14 +81,14 @@ function detectSystemLanguage() {
 function checkSummerTime(date) {
     const month = date.getMonth();
     const day = date.getDate();
-
+    
     if (month > 4 && month < 9) {
         return true;
     }
-
+    
     if (month === 3 && day >= 25) return true;
     if (month === 9 && day <= 25) return true;
-
+    
     return false;
 }
 
@@ -96,12 +96,12 @@ function formatDateTime(date, language = 'ar') {
     if (language === 'ar') {
         const arabicDays = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
         const arabicMonths = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
-
+        
         const dayName = arabicDays[date.getDay()];
         const day = date.getDate();
         const monthName = arabicMonths[date.getMonth()];
         const year = date.getFullYear();
-
+        
         return `${dayName}، ${day} ${monthName} ${year}`;
     } else {
         return date.toLocaleDateString('en-US', {
@@ -117,43 +117,43 @@ function formatTime12Hour(date, timezone = 'egypt') {
     const timezoneInfo = timeZones[timezone];
     const isSummer = checkSummerTime(date);
     const offset = isSummer ? timezoneInfo.summerOffset : timezoneInfo.offset;
-
+    
     const utcTime = date.getTime() + (date.getTimezoneOffset() * 60000);
     const localTime = new Date(utcTime + (3600000 * offset));
-
+    
     let hours = localTime.getHours();
     const minutes = localTime.getMinutes().toString().padStart(2, '0');
     const seconds = localTime.getSeconds().toString().padStart(2, '0');
     const ampm = hours >= 12 ? 'م' : 'ص';
-
+    
     hours = hours % 12;
     hours = hours ? hours : 12;
     const hoursStr = hours.toString().padStart(2, '0');
-
+    
     return `${hoursStr}:${minutes}:${seconds} ${ampm}`;
 }
 
 function updateClock() {
     const now = new Date();
     const systemLanguage = detectSystemLanguage();
-
+    
     document.getElementById('clock-time').textContent = formatTime12Hour(now, currentTimezone);
-
+    
     const timezoneInfo = timeZones[currentTimezone];
     const isSummer = checkSummerTime(now);
     const offset = isSummer ? timezoneInfo.summerOffset : timezoneInfo.offset;
     const offsetSign = offset >= 0 ? '+' : '';
-
+    
     document.getElementById('clock-date').textContent = formatDateTime(now, systemLanguage);
-
+    
     const seasonElement = document.getElementById('clock-season');
     const seasonText = document.getElementById('season-text');
     const timezoneInfoElement = document.getElementById('timezone-info');
-
+    
     if (systemLanguage === 'ar') {
         seasonText.textContent = `توقيت ${timezoneInfo.city}`;
         timezoneInfoElement.textContent = `UTC${offsetSign}${offset}`;
-
+        
         if (isSummer) {
             seasonElement.className = 'clock-season summer';
             seasonElement.innerHTML = `<i class="fas fa-sun"></i> <span>${seasonText.textContent} (صيفي)</span>`;
@@ -164,7 +164,7 @@ function updateClock() {
     } else {
         seasonText.textContent = `${timezoneInfo.city} Time`;
         timezoneInfoElement.textContent = `UTC${offsetSign}${offset}`;
-
+        
         if (isSummer) {
             seasonElement.className = 'clock-season summer';
             seasonElement.innerHTML = `<i class="fas fa-sun"></i> <span>${seasonText.textContent} (Summer)</span>`;
@@ -173,10 +173,10 @@ function updateClock() {
             seasonElement.innerHTML = `<i class="fas fa-snowflake"></i> <span>${seasonText.textContent}</span>`;
         }
     }
-
+    
     const balanceUpdate = document.getElementById('balance-update-time');
-    balanceUpdate.textContent = systemLanguage === 'ar' ?
-        `اليوم ${formatTime12Hour(now, currentTimezone)}` :
+    balanceUpdate.textContent = systemLanguage === 'ar' ? 
+        `اليوم ${formatTime12Hour(now, currentTimezone)}` : 
         `Today ${formatTime12Hour(now, currentTimezone)}`;
 }
 
@@ -192,23 +192,23 @@ function changeTimezone(timezone) {
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
-
+    
     let icon = 'fas fa-info-circle';
     if (type === 'success') icon = 'fas fa-check-circle';
     if (type === 'error') icon = 'fas fa-exclamation-circle';
     if (type === 'warning') icon = 'fas fa-exclamation-triangle';
-
+    
     notification.innerHTML = `
         <i class="${icon}"></i>
         <span>${message}</span>
     `;
-
+    
     document.body.appendChild(notification);
-
+    
     setTimeout(() => {
         notification.classList.add('show');
     }, 100);
-
+    
     setTimeout(() => {
         notification.classList.remove('show');
         setTimeout(() => {
@@ -230,7 +230,7 @@ function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
     const themeToggle = document.getElementById('theme-toggle');
     const isDarkMode = document.body.classList.contains('dark-mode');
-
+    
     if (isDarkMode) {
         themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         localStorage.setItem('theme', 'dark');
@@ -246,14 +246,14 @@ function switchSection(sectionId) {
     document.querySelectorAll('section').forEach(section => {
         section.classList.remove('active');
     });
-
+    
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
     });
-
+    
     document.getElementById(sectionId + '-section').classList.add('active');
     document.querySelector(`.nav-link[data-section="${sectionId}"]`).classList.add('active');
-
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -261,7 +261,7 @@ function openSiteDetails(site) {
     const modal = document.getElementById('site-modal');
     const modalTitle = document.getElementById('modal-title');
     const modalBody = document.getElementById('modal-body');
-
+    
     modalTitle.textContent = site.name;
     modalBody.innerHTML = `
         <div class="site-details">
@@ -293,7 +293,7 @@ function openSiteDetails(site) {
             </div>
         </div>
     `;
-
+    
     modalBody.querySelector('.book-from-modal').addEventListener('click', () => {
         modal.classList.remove('active');
         switchSection('booking');
@@ -301,7 +301,7 @@ function openSiteDetails(site) {
         calculatePrice();
         showNotification(`تم اختيار ${site.name} للحجز`, 'success');
     });
-
+    
     modal.classList.add('active');
 }
 
@@ -309,14 +309,14 @@ function openKingDetails(king) {
     const modal = document.getElementById('king-modal');
     const modalTitle = document.getElementById('king-modal-title');
     const modalBody = document.getElementById('king-modal-body');
-
+    
     modalTitle.textContent = king.name;
-
+    
     let achievementsList = '';
     king.achievements.forEach(achievement => {
         achievementsList += `<li>${achievement}</li>`;
     });
-
+    
     modalBody.innerHTML = `
         <div class="site-details">
             <div>
@@ -342,7 +342,7 @@ function openKingDetails(king) {
             </div>
         </div>
     `;
-
+    
     modal.classList.add('active');
 }
 
@@ -351,7 +351,7 @@ function initializeSearchSystem() {
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
     const searchResults = document.getElementById('search-results');
-
+    
     const searchCategories = {
         sites: {
             name: "معالم أثرية",
@@ -379,18 +379,18 @@ function initializeSearchSystem() {
             color: "#FF9800"
         }
     };
-
+    
     function performSearch(query) {
         if (!query.trim()) {
             searchResults.classList.remove('active');
             return;
         }
-
+        
         const results = [];
         const lowerQuery = query.toLowerCase();
-
+        
         archaeologicalSites.forEach(site => {
-            if (site.name.toLowerCase().includes(lowerQuery) ||
+            if (site.name.toLowerCase().includes(lowerQuery) || 
                 site.location.toLowerCase().includes(lowerQuery) ||
                 site.description.toLowerCase().includes(lowerQuery) ||
                 site.era.toLowerCase().includes(lowerQuery)) {
@@ -405,9 +405,9 @@ function initializeSearchSystem() {
                 });
             }
         });
-
+        
         egyptianKings.forEach(king => {
-            if (king.name.toLowerCase().includes(lowerQuery) ||
+            if (king.name.toLowerCase().includes(lowerQuery) || 
                 king.era.toLowerCase().includes(lowerQuery) ||
                 king.description.toLowerCase().includes(lowerQuery) ||
                 king.achievements.some(a => a.toLowerCase().includes(lowerQuery))) {
@@ -422,8 +422,8 @@ function initializeSearchSystem() {
                 });
             }
         });
-
-        if (lowerQuery.includes('رصيد') || lowerQuery.includes('محفظة') ||
+        
+        if (lowerQuery.includes('رصيد') || lowerQuery.includes('محفظة') || 
             lowerQuery.includes('مال') || lowerQuery.includes('جنيه')) {
             results.push({
                 type: 'wallet',
@@ -435,8 +435,8 @@ function initializeSearchSystem() {
                 data: null
             });
         }
-
-        if (lowerQuery.includes('حجز') || lowerQuery.includes('تذكرة') ||
+        
+        if (lowerQuery.includes('حجز') || lowerQuery.includes('تذكرة') || 
             lowerQuery.includes('رحلة') || lowerQuery.includes('زيارة')) {
             results.push({
                 type: 'booking',
@@ -448,8 +448,8 @@ function initializeSearchSystem() {
                 data: null
             });
         }
-
-        if (lowerQuery.includes('اختبار') || lowerQuery.includes('سؤال') ||
+        
+        if (lowerQuery.includes('اختبار') || lowerQuery.includes('سؤال') || 
             lowerQuery.includes('تحدي') || lowerQuery.includes('ثقافة')) {
             results.push({
                 type: 'quiz',
@@ -461,13 +461,13 @@ function initializeSearchSystem() {
                 data: null
             });
         }
-
+        
         displaySearchResults(results);
     }
-
+    
     function displaySearchResults(results) {
         searchResults.innerHTML = '';
-
+        
         if (results.length === 0) {
             searchResults.innerHTML = `
                 <div class="search-result-item" style="text-align: center; color: var(--secondary-color);">
@@ -481,7 +481,7 @@ function initializeSearchSystem() {
             searchResults.classList.add('active');
             return;
         }
-
+        
         results.forEach(result => {
             const resultElement = document.createElement('div');
             resultElement.className = 'search-result-item';
@@ -493,16 +493,16 @@ function initializeSearchSystem() {
                 </div>
                 <div class="result-action">${result.action}</div>
             `;
-
+            
             resultElement.addEventListener('click', () => {
                 handleSearchResultClick(result);
                 searchInput.value = '';
                 searchResults.classList.remove('active');
             });
-
+            
             searchResults.appendChild(resultElement);
         });
-
+        
         const balance = parseInt(localStorage.getItem('walletBalance') || '0');
         if (balance > 0 && searchInput.value.toLowerCase().includes('رصيد')) {
             const balanceResult = document.createElement('div');
@@ -514,12 +514,12 @@ function initializeSearchSystem() {
             `;
             searchResults.appendChild(balanceResult);
         }
-
+        
         searchResults.classList.add('active');
     }
-
+    
     function handleSearchResultClick(result) {
-        switch (result.type) {
+        switch(result.type) {
             case 'sites':
                 openSiteDetails(result.data);
                 break;
@@ -540,27 +540,27 @@ function initializeSearchSystem() {
                 break;
         }
     }
-
-    searchInput.addEventListener('input', function () {
+    
+    searchInput.addEventListener('input', function() {
         performSearch(this.value);
     });
-
-    searchButton.addEventListener('click', function () {
+    
+    searchButton.addEventListener('click', function() {
         performSearch(searchInput.value);
     });
-
-    searchInput.addEventListener('keypress', function (e) {
+    
+    searchInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             performSearch(this.value);
         }
     });
-
-    document.addEventListener('click', function (e) {
+    
+    document.addEventListener('click', function(e) {
         if (!searchContainer.contains(e.target)) {
             searchResults.classList.remove('active');
         }
     });
-
+    
     const urlParams = new URLSearchParams(window.location.search);
     const searchParam = urlParams.get('search');
     if (searchParam) {
@@ -573,10 +573,10 @@ function initializeSearchSystem() {
 function displaySites() {
     const sitesContainer = document.getElementById('sites-container');
     const siteSelect = document.getElementById('site');
-
+    
     sitesContainer.innerHTML = '';
     siteSelect.innerHTML = '<option value="">-- اختر المعلم الأثري --</option>';
-
+    
     archaeologicalSites.forEach(site => {
         const siteCard = document.createElement('div');
         siteCard.className = 'site-card';
@@ -609,12 +609,12 @@ function displaySites() {
                 </div>
             </div>
         `;
-
+        
         siteCard.querySelector('.view-details').addEventListener('click', (e) => {
             e.preventDefault();
             openSiteDetails(site);
         });
-
+        
         siteCard.querySelector('.book-site').addEventListener('click', (e) => {
             e.preventDefault();
             switchSection('booking');
@@ -622,9 +622,9 @@ function displaySites() {
             calculatePrice();
             showNotification(`تم اختيار ${site.name} للحجز`, 'success');
         });
-
+        
         sitesContainer.appendChild(siteCard);
-
+        
         const option = document.createElement('option');
         option.value = site.id;
         option.textContent = site.name;
@@ -637,9 +637,9 @@ function displaySites() {
 // ==================== عرض ملوك مصر ====================
 function displayKings() {
     const kingsContainer = document.getElementById('kings-container');
-
+    
     kingsContainer.innerHTML = '';
-
+    
     egyptianKings.forEach(king => {
         const kingCard = document.createElement('div');
         kingCard.className = 'site-card';
@@ -669,12 +669,12 @@ function displayKings() {
                 </div>
             </div>
         `;
-
+        
         kingCard.querySelector('.view-king-details').addEventListener('click', (e) => {
             e.preventDefault();
             openKingDetails(king);
         });
-
+        
         kingsContainer.appendChild(kingCard);
     });
 }
@@ -686,47 +686,47 @@ function initializeBookingSystem() {
     const visitorsInput = document.getElementById('visitors');
     const visitorTypeEgyptian = document.getElementById('visitor-type-egyptian');
     const visitorTypeForeign = document.getElementById('visitor-type-foreign');
-
+    
     function updatePrice() {
         calculatePrice();
     }
-
+    
     siteSelect.addEventListener('change', updatePrice);
     visitorsInput.addEventListener('input', updatePrice);
     visitorTypeEgyptian.addEventListener('change', updatePrice);
     visitorTypeForeign.addEventListener('change', updatePrice);
-
+    
     document.querySelectorAll('.service-item input').forEach(checkbox => {
         checkbox.addEventListener('change', updatePrice);
     });
-
-    bookingForm.addEventListener('submit', function (e) {
+    
+    bookingForm.addEventListener('submit', function(e) {
         e.preventDefault();
-
+        
         const bookingName = document.getElementById('booking-name').value;
         const bookingPhone = document.getElementById('booking-phone').value;
         const nationalId = document.getElementById('national-id').value;
         const siteId = siteSelect.value;
         const visitors = visitorsInput.value;
         const date = document.getElementById('date').value;
-
+        
         if (!bookingName || !bookingPhone || !nationalId || !siteId || !visitors || !date) {
             showNotification('يرجى ملء جميع الحقول المطلوبة', 'error');
             return;
         }
-
+        
         const selectedSite = archaeologicalSites.find(s => s.id == siteId);
         const visitorType = document.querySelector('input[name="visitor-type"]:checked').value;
         const isEgyptian = visitorType === 'egyptian';
-
+        
         const totalPrice = calculatePrice(true);
-
-        showPaymentProcess('wallet', totalPrice,
+        
+        showPaymentProcess('wallet', totalPrice, 
             () => {
                 showLoading(true);
                 setTimeout(() => {
                     showLoading(false);
-
+                    
                     // خصم المبلغ من المحفظة
                     const currentBalance = parseInt(document.getElementById('balance-amount-main').textContent) || 0;
                     if (currentBalance >= totalPrice) {
@@ -735,7 +735,7 @@ function initializeBookingSystem() {
                         balance -= totalPrice;
                         localStorage.setItem('walletBalance', balance);
                         document.getElementById('balance-amount-main').textContent = `${balance} جنيه`;
-
+                        
                         // إضافة معاملة للتاريخ
                         const transactionItem = document.createElement('div');
                         transactionItem.className = 'transaction-item';
@@ -744,9 +744,9 @@ function initializeBookingSystem() {
                             <span class="transaction-amount negative">-${totalPrice} جنيه</span>
                         `;
                         document.getElementById('transaction-list').insertBefore(transactionItem, document.getElementById('transaction-list').firstChild);
-
+                        
                         const bookingNumber = 'SPHX-' + Date.now().toString().slice(-8);
-
+                        
                         const receipt = `
                             <div class="payment-receipt">
                                 <h3><i class="fas fa-receipt"></i> إيصال الحجز</h3>
@@ -791,7 +791,7 @@ function initializeBookingSystem() {
                                 </div>
                             </div>
                         `;
-
+                        
                         document.getElementById('payment-process-content').innerHTML = `
                             <div class="payment-success">
                                 <i class="fas fa-check-circle"></i>
@@ -811,7 +811,7 @@ function initializeBookingSystem() {
                                 </button>
                             </div>
                         `;
-
+                        
                         document.getElementById('confirm-booking-btn').addEventListener('click', () => {
                             showNotification('تم تأكيد الحجز بنجاح!', 'success');
                             setTimeout(() => {
@@ -820,17 +820,17 @@ function initializeBookingSystem() {
                                 calculatePrice();
                             }, 2000);
                         });
-
+                        
                         document.getElementById('print-receipt').addEventListener('click', () => {
                             window.print();
                         });
-
+                        
                         document.getElementById('new-booking').addEventListener('click', () => {
                             bookingForm.reset();
                             document.getElementById('payment-process').classList.remove('active');
                             calculatePrice();
                         });
-
+                        
                         showNotification(`تم تأكيد حجزك بنجاح! رقم الحجز: ${bookingNumber}`, 'success');
                     } else {
                         document.getElementById('payment-process-content').innerHTML = `
@@ -849,16 +849,16 @@ function initializeBookingSystem() {
                                 </button>
                             </div>
                         `;
-
+                        
                         document.getElementById('add-funds-now').addEventListener('click', () => {
                             switchSection('wallet');
                             document.getElementById('payment-process').classList.remove('active');
                         });
-
+                        
                         document.getElementById('change-payment-method').addEventListener('click', () => {
                             document.getElementById('payment-process').classList.remove('active');
                         });
-
+                        
                         showNotification('رصيدك غير كافي لإتمام عملية الحجز', 'error');
                     }
                 }, 2000);
@@ -879,7 +879,7 @@ function initializeBookingSystem() {
                         </button>
                     </div>
                 `;
-
+                
                 showNotification('فشلت عملية الدفع', 'error');
             }
         );
@@ -892,7 +892,7 @@ function calculatePrice(returnTotal = false) {
     const selectedOption = siteSelect.options[siteSelect.selectedIndex];
     const visitors = parseInt(document.getElementById('visitors').value) || 0;
     const isEgyptian = document.getElementById('visitor-type-egyptian').checked;
-
+    
     let basePrice = 0;
     if (selectedOption) {
         if (isEgyptian) {
@@ -903,7 +903,7 @@ function calculatePrice(returnTotal = false) {
             document.getElementById('ticket-price-per-person').textContent = `${basePrice} جنيه (أجنبي)`;
         }
     }
-
+    
     let servicesPrice = 0;
     const serviceCheckboxes = document.querySelectorAll('.service-item input[type="checkbox"]');
     serviceCheckboxes.forEach(checkbox => {
@@ -915,21 +915,21 @@ function calculatePrice(returnTotal = false) {
             servicesPrice += serviceValue;
         }
     });
-
+    
     const totalTicketPrice = basePrice * visitors;
     const totalPrice = totalTicketPrice + servicesPrice;
-
+    
     document.getElementById('visitors-count').textContent = visitors;
     document.getElementById('ticket-price-total').textContent = `${totalTicketPrice} جنيه`;
     document.getElementById('services-price').textContent = `${servicesPrice} جنيه`;
     document.getElementById('total-price').textContent = `${totalPrice} جنيه`;
-
+    
     updateInstallmentOptions(totalPrice);
-
+    
     const balanceAmount = document.getElementById('balance-amount-main');
     const currentBalance = parseInt(balanceAmount.textContent) || 0;
     const submitButton = document.getElementById('submit-booking');
-
+    
     if (totalPrice > 0 && totalPrice > currentBalance) {
         submitButton.disabled = true;
         submitButton.title = "رصيدك غير كافي لإتمام عملية الحجز";
@@ -937,7 +937,7 @@ function calculatePrice(returnTotal = false) {
         submitButton.disabled = false;
         submitButton.title = "";
     }
-
+    
     if (returnTotal) {
         return totalPrice;
     }
@@ -945,11 +945,11 @@ function calculatePrice(returnTotal = false) {
 
 function updateInstallmentOptions(totalPrice) {
     if (totalPrice <= 0) return;
-
+    
     const installment3 = Math.ceil(totalPrice / 3);
     const installment6 = Math.ceil(totalPrice / 6);
     const installment12 = Math.ceil(totalPrice / 12);
-
+    
     document.getElementById('installment-amount-1').textContent = `${totalPrice} جنيه`;
     document.getElementById('installment-amount-3').textContent = `${installment3} جنيه/شهر`;
     document.getElementById('installment-amount-6').textContent = `${installment6} جنيه/شهر`;
@@ -960,9 +960,9 @@ function updateInstallmentOptions(totalPrice) {
 function showPaymentProcess(method, amount, onSuccess, onFailure) {
     const paymentProcess = document.getElementById('payment-process');
     const paymentProcessContent = document.getElementById('payment-process-content');
-
+    
     paymentProcess.classList.add('active');
-
+    
     updatePaymentStep(1);
     paymentProcessContent.innerHTML = `
         <h3>تأكيد عملية الدفع</h3>
@@ -977,7 +977,7 @@ function showPaymentProcess(method, amount, onSuccess, onFailure) {
             </button>
         </div>
     `;
-
+    
     document.getElementById('confirm-payment').addEventListener('click', () => {
         updatePaymentStep(2);
         paymentProcessContent.innerHTML = `
@@ -987,10 +987,10 @@ function showPaymentProcess(method, amount, onSuccess, onFailure) {
                 <p>يرجى الانتظار قليلاً</p>
             </div>
         `;
-
+        
         setTimeout(() => {
             updatePaymentStep(3);
-
+            
             if (Math.random() < 0.9) {
                 onSuccess();
             } else {
@@ -998,7 +998,7 @@ function showPaymentProcess(method, amount, onSuccess, onFailure) {
             }
         }, 3000);
     });
-
+    
     document.getElementById('cancel-payment').addEventListener('click', () => {
         paymentProcess.classList.remove('active');
         showNotification('تم إلغاء عملية الدفع', 'info');
@@ -1044,22 +1044,22 @@ function initializeWalletMain() {
     const resetBalanceBtn = document.getElementById('reset-balance-main');
     const balanceAmount = document.getElementById('balance-amount-main');
     const transactionList = document.getElementById('transaction-list');
-
+    
     let balance = 0;
     let walletPassword = null;
     let securityQuestion = null;
     let securityAnswer = null;
-
+    
     const savedBalance = localStorage.getItem('walletBalance');
     const savedPassword = localStorage.getItem('walletPassword');
     const savedSecurityQuestion = localStorage.getItem('walletSecurityQuestion');
     const savedSecurityAnswer = localStorage.getItem('walletSecurityAnswer');
-
+    
     if (savedBalance) {
         balance = parseInt(savedBalance);
         updateBalance();
     }
-
+    
     if (savedPassword && savedSecurityQuestion && savedSecurityAnswer) {
         walletPassword = savedPassword;
         securityQuestion = savedSecurityQuestion;
@@ -1068,28 +1068,28 @@ function initializeWalletMain() {
     } else {
         updateSecurityStatus(false);
     }
-
+    
     function updateBalance() {
         balanceAmount.textContent = `${balance} جنيه`;
         localStorage.setItem('walletBalance', balance);
         calculatePrice();
     }
-
+    
     function addTransaction(description, amount, type) {
         const transactionItem = document.createElement('div');
         transactionItem.className = 'transaction-item';
-
+        
         const amountClass = type === 'positive' ? 'positive' : 'negative';
         const amountSign = type === 'positive' ? '+' : '-';
-
+        
         transactionItem.innerHTML = `
             <span>${description}</span>
             <span class="transaction-amount ${amountClass}">${amountSign}${amount} جنيه</span>
         `;
-
+        
         transactionList.insertBefore(transactionItem, transactionList.firstChild);
     }
-
+    
     addFundsBtn.addEventListener('click', () => {
         const amount = prompt("أدخل المبلغ الذي تريد إضافته:");
         if (amount && !isNaN(amount) && amount > 0) {
@@ -1110,7 +1110,7 @@ function initializeWalletMain() {
             showNotification("يرجى إدخال مبلغ صحيح", 'error');
         }
     });
-
+    
     withdrawFundsBtn.addEventListener('click', () => {
         const amount = prompt("أدخل المبلغ الذي تريد سحبه:");
         if (amount && !isNaN(amount) && amount > 0) {
@@ -1135,11 +1135,11 @@ function initializeWalletMain() {
             showNotification("يرجى إدخال مبلغ صحيح", 'error');
         }
     });
-
+    
     function updateSecurityStatus(hasPassword) {
         const securityStatus = document.getElementById('security-status');
         const changePasswordBtn = document.getElementById('change-password-main');
-
+        
         if (hasPassword) {
             securityStatus.className = 'security-status active';
             securityStatus.innerHTML = `
@@ -1162,19 +1162,19 @@ function initializeWalletMain() {
             changePasswordBtn.style.display = 'none';
         }
     }
-
+    
     function showPasswordVerification(title, message, onSuccess) {
         document.getElementById('password-verify-title').textContent = title;
         document.getElementById('password-verify-message').textContent = message;
         document.getElementById('verify-password').value = '';
         document.getElementById('password-error').style.display = 'none';
-
+        
         const modal = document.getElementById('password-verify-modal');
         modal.classList.add('active');
-
-        const verifyHandler = function () {
+        
+        const verifyHandler = function() {
             const password = document.getElementById('verify-password').value;
-
+            
             if (password === walletPassword) {
                 modal.classList.remove('active');
                 onSuccess();
@@ -1182,136 +1182,136 @@ function initializeWalletMain() {
                 document.getElementById('password-error').style.display = 'block';
             }
         };
-
+        
         document.getElementById('verify-password-btn').onclick = verifyHandler;
-
-        document.getElementById('verify-password').onkeypress = function (e) {
+        
+        document.getElementById('verify-password').onkeypress = function(e) {
             if (e.key === 'Enter') {
                 verifyHandler();
             }
         };
     }
-
+    
     setupPasswordBtn.addEventListener('click', () => {
         document.getElementById('password-setup-modal').classList.add('active');
     });
-
-    document.getElementById('setup-password-btn').addEventListener('click', function () {
+    
+    document.getElementById('setup-password-btn').addEventListener('click', function() {
         const newPassword = document.getElementById('new-password').value;
         const confirmPassword = document.getElementById('confirm-password').value;
         const question = document.getElementById('security-question').value;
         const answer = document.getElementById('security-answer').value;
-
+        
         if (!newPassword) {
             document.getElementById('password-setup-modal').classList.remove('active');
             showNotification('تم تخطي إنشاء كلمة المرور', 'info');
             return;
         }
-
+        
         if (newPassword !== confirmPassword) {
             showNotification('كلمتا المرور غير متطابقتين', 'error');
             return;
         }
-
+        
         if (newPassword.length < 4) {
             showNotification('كلمة المرور يجب أن تحتوي على 4 أحرف على الأقل', 'error');
             return;
         }
-
+        
         walletPassword = newPassword;
         securityQuestion = question;
         securityAnswer = answer.toLowerCase().trim();
-
+        
         localStorage.setItem('walletPassword', walletPassword);
         localStorage.setItem('walletSecurityQuestion', securityQuestion);
         localStorage.setItem('walletSecurityAnswer', securityAnswer);
-
+        
         document.getElementById('password-setup-modal').classList.remove('active');
         showNotification('تم إنشاء كلمة مرور المحفظة بنجاح', 'success');
         updateSecurityStatus(true);
-
+        
         document.getElementById('new-password').value = '';
         document.getElementById('confirm-password').value = '';
         document.getElementById('security-question').value = '';
         document.getElementById('security-answer').value = '';
     });
-
-    document.getElementById('skip-password-btn').addEventListener('click', function () {
+    
+    document.getElementById('skip-password-btn').addEventListener('click', function() {
         document.getElementById('password-setup-modal').classList.remove('active');
         showNotification('تم تخطي إنشاء كلمة المرور', 'info');
     });
-
-    changePasswordBtn.addEventListener('click', function () {
+    
+    changePasswordBtn.addEventListener('click', function() {
         if (!walletPassword) {
             showNotification('لا توجد كلمة مرور مسبقة للمحفظة', 'error');
             return;
         }
         document.getElementById('change-password-modal').classList.add('active');
     });
-
-    document.getElementById('change-password-btn').addEventListener('click', function () {
+    
+    document.getElementById('change-password-btn').addEventListener('click', function() {
         const currentPassword = document.getElementById('current-password').value;
         const newPassword = document.getElementById('new-password-change').value;
         const confirmPassword = document.getElementById('confirm-password-change').value;
-
+        
         if (currentPassword !== walletPassword) {
             document.getElementById('change-password-error').style.display = 'block';
             return;
         }
-
+        
         if (newPassword !== confirmPassword) {
             showNotification('كلمتا المرور غير متطابقتين', 'error');
             return;
         }
-
+        
         if (newPassword.length < 4) {
             showNotification('كلمة المرور يجب أن تحتوي على 4 أحرف على الأقل', 'error');
             return;
         }
-
+        
         walletPassword = newPassword;
         localStorage.setItem('walletPassword', walletPassword);
-
+        
         document.getElementById('change-password-modal').classList.remove('active');
         showNotification('تم تغيير كلمة مرور المحفظة بنجاح', 'success');
-
+        
         document.getElementById('current-password').value = '';
         document.getElementById('new-password-change').value = '';
         document.getElementById('confirm-password-change').value = '';
     });
-
-    document.getElementById('remove-password-btn').addEventListener('click', function () {
+    
+    document.getElementById('remove-password-btn').addEventListener('click', function() {
         if (confirm('هل أنت متأكد من إزالة كلمة المرور؟ المحفظة لن تكون محمية بعد الآن.')) {
             walletPassword = null;
             securityQuestion = null;
             securityAnswer = null;
-
+            
             localStorage.removeItem('walletPassword');
             localStorage.removeItem('walletSecurityQuestion');
             localStorage.removeItem('walletSecurityAnswer');
-
+            
             document.getElementById('change-password-modal').classList.remove('active');
             showNotification('تم إزالة كلمة مرور المحفظة بنجاح', 'success');
             updateSecurityStatus(false);
         }
     });
-
-    document.getElementById('forgot-password-link').addEventListener('click', function (e) {
+    
+    document.getElementById('forgot-password-link').addEventListener('click', function(e) {
         e.preventDefault();
-
+        
         if (!securityQuestion) {
             showNotification('لم يتم تعيين سؤال أمان للمحفظة', 'error');
             return;
         }
-
+        
         document.getElementById('password-verify-modal').classList.remove('active');
         document.getElementById('password-recovery-modal').classList.add('active');
         document.getElementById('recovery-question').textContent = securityQuestion;
     });
-
-    document.getElementById('verify-recovery-btn').addEventListener('click', function () {
+    
+    document.getElementById('verify-recovery-btn').addEventListener('click', function() {
         const answer = document.getElementById('recovery-answer').value.toLowerCase().trim();
-
+        
         if (answer === securityAnswer) {
             document.getElementById('password-recovery-modal').classList.remove('active');
             showNotification('تم التحقق بنجاح! يمكنك الآن الوصول إلى المحفظة', 'success');
@@ -1319,14 +1319,14 @@ function initializeWalletMain() {
             document.getElementById('recovery-error').style.display = 'block';
         }
     });
-
-    resetBalanceBtn.addEventListener('click', function () {
+    
+    resetBalanceBtn.addEventListener('click', function() {
         document.getElementById('reset-balance-modal').classList.add('active');
     });
-
-    document.getElementById('confirm-reset-btn').addEventListener('click', function () {
+    
+    document.getElementById('confirm-reset-btn').addEventListener('click', function() {
         const confirmText = document.getElementById('reset-confirm').value;
-
+        
         if (confirmText === 'نعم') {
             if (walletPassword) {
                 document.getElementById('reset-balance-modal').classList.remove('active');
@@ -1347,11 +1347,11 @@ function initializeWalletMain() {
             document.getElementById('reset-error').style.display = 'block';
         }
     });
-
-    document.getElementById('cancel-reset-btn').addEventListener('click', function () {
+    
+    document.getElementById('cancel-reset-btn').addEventListener('click', function() {
         document.getElementById('reset-balance-modal').classList.remove('active');
     });
-
+    
     return {
         getBalance: () => balance,
         updateBalance: updateBalance
@@ -1369,15 +1369,15 @@ let currentQuizQuestions = [];
 
 function initializeQuizSystem() {
     const challengesContainer = document.getElementById('challenges-container');
-
+    
     const challengeLevels = [
         { level: 1, name: "مبتدئ", description: "10 أسئلة سهلة عن مصر القديمة", points: 100, color: "#4CAF50" },
         { level: 2, name: "متوسط", description: "15 سؤالاً متوسط الصعوبة", points: 250, color: "#FF9800" },
         { level: 3, name: "متقدم", description: "20 سؤالاً صعباً عن الحضارة الفرعونية", points: 500, color: "#f44336" }
     ];
-
+    
     challengesContainer.innerHTML = '';
-
+    
     challengeLevels.forEach(challenge => {
         const challengeCard = document.createElement('div');
         challengeCard.className = 'challenge-card';
@@ -1401,11 +1401,11 @@ function initializeQuizSystem() {
                 </button>
             </div>
         `;
-
-        challengeCard.querySelector('.start-quiz-btn').addEventListener('click', function () {
+        
+        challengeCard.querySelector('.start-quiz-btn').addEventListener('click', function() {
             startQuiz(challenge.level);
         });
-
+        
         challengesContainer.appendChild(challengeCard);
     });
 }
@@ -1415,17 +1415,17 @@ function startQuiz(level) {
     currentQuestionIndex = 0;
     userScore = 0;
     userAnswers = [];
-
+    
     let filteredQuestions = quizQuestions.filter(q => q.level === level);
-
+    
     let questionCount = level === 1 ? 10 : level === 2 ? 15 : 20;
     filteredQuestions = filteredQuestions.slice(0, questionCount);
-
+    
     currentQuizQuestions = filteredQuestions;
-
+    
     showQuizInterface();
     showQuestion(currentQuestionIndex);
-
+    
     startTimer(level === 1 ? 900 : level === 2 ? 1500 : 1800);
 }
 
@@ -1466,16 +1466,16 @@ function showQuizInterface() {
             </button>
         </div>
     `;
-
+    
     quizContainer.classList.add('active');
-
+    
     document.getElementById('prev-question').addEventListener('click', () => {
         if (currentQuestionIndex > 0) {
             currentQuestionIndex--;
             showQuestion(currentQuestionIndex);
         }
     });
-
+    
     document.getElementById('next-question').addEventListener('click', () => {
         if (currentQuestionIndex < currentQuizQuestions.length - 1) {
             currentQuestionIndex++;
@@ -1488,24 +1488,24 @@ function showQuizInterface() {
 
 function showQuestion(index) {
     const question = currentQuizQuestions[index];
-
+    
     document.getElementById('current-question').textContent = index + 1;
     document.getElementById('total-questions').textContent = currentQuizQuestions.length;
-
+    
     const progress = ((index) / currentQuizQuestions.length) * 100;
     document.getElementById('quiz-progress-bar').style.width = `${progress}%`;
-
+    
     document.getElementById('quiz-question').textContent = question.question;
-
+    
     const optionsContainer = document.getElementById('quiz-options');
     optionsContainer.innerHTML = '';
-
+    
     question.options.forEach((option, optionIndex) => {
         const optionElement = document.createElement('div');
         optionElement.className = 'quiz-option';
         optionElement.textContent = option;
         optionElement.dataset.index = optionIndex;
-
+        
         if (userAnswers[index] !== undefined) {
             if (userAnswers[index] === optionIndex) {
                 optionElement.classList.add('selected');
@@ -1522,11 +1522,11 @@ function showQuestion(index) {
                 }
             }
         }
-
+        
         optionElement.addEventListener('click', () => {
             if (userAnswers[index] === undefined) {
                 userAnswers[index] = optionIndex;
-
+                
                 if (optionIndex === question.correct) {
                     userScore += question.points;
                     optionElement.classList.add('correct');
@@ -1535,33 +1535,33 @@ function showQuestion(index) {
                     optionElement.classList.add('incorrect');
                     showNotification(`إجابة خاطئة! الإجابة الصحيحة: ${question.options[question.correct]}`, 'error');
                 }
-
+                
                 optionElement.classList.add('selected');
-
+                
                 updateQuizStats();
             }
         });
-
+        
         optionsContainer.appendChild(optionElement);
     });
-
+    
     document.getElementById('prev-question').disabled = index === 0;
     document.getElementById('next-question').textContent = index === currentQuizQuestions.length - 1 ? 'إنهاء الاختبار' : 'التالي';
-    document.getElementById('next-question').innerHTML = index === currentQuizQuestions.length - 1 ?
-        'إنهاء الاختبار <i class="fas fa-flag-checkered"></i>' :
+    document.getElementById('next-question').innerHTML = index === currentQuizQuestions.length - 1 ? 
+        'إنهاء الاختبار <i class="fas fa-flag-checkered"></i>' : 
         'التالي <i class="fas fa-arrow-left"></i>';
 }
 
 function startTimer(totalSeconds) {
     timeLeft = totalSeconds;
     updateTimerDisplay();
-
+    
     if (timer) clearInterval(timer);
-
+    
     timer = setInterval(() => {
         timeLeft--;
         updateTimerDisplay();
-
+        
         if (timeLeft <= 0) {
             clearInterval(timer);
             finishQuiz();
@@ -1573,9 +1573,9 @@ function updateTimerDisplay() {
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
     const timerDisplay = document.getElementById('quiz-timer');
-
+    
     timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
+    
     if (timeLeft <= 60) {
         timerDisplay.className = 'timer-display timer-danger';
     } else if (timeLeft <= 180) {
@@ -1587,20 +1587,20 @@ function updateTimerDisplay() {
 
 function updateQuizStats() {
     document.getElementById('current-score').textContent = userScore;
-
+    
     const correctCount = userAnswers.reduce((count, answer, index) => {
         if (answer !== undefined && answer === currentQuizQuestions[index].correct) {
             return count + 1;
         }
         return count;
     }, 0);
-
+    
     document.getElementById('correct-answers').textContent = correctCount;
 }
 
 function finishQuiz() {
     if (timer) clearInterval(timer);
-
+    
     const quizContainer = document.getElementById('quiz-container');
     const totalQuestions = currentQuizQuestions.length;
     const answeredQuestions = userAnswers.filter(a => a !== undefined).length;
@@ -1610,11 +1610,11 @@ function finishQuiz() {
         }
         return count;
     }, 0);
-
+    
     const percentage = Math.round((correctAnswers / totalQuestions) * 100);
     let badge = '🥉';
     let badgeColor = '#cd7f32';
-
+    
     if (percentage >= 80) {
         badge = '🥇';
         badgeColor = '#FFD700';
@@ -1622,7 +1622,7 @@ function finishQuiz() {
         badge = '🥈';
         badgeColor = '#C0C0C0';
     }
-
+    
     quizContainer.innerHTML = `
         <div class="quiz-results">
             <div class="quiz-badge" style="background: linear-gradient(135deg, ${badgeColor}, ${badgeColor}dd)">
@@ -1645,25 +1645,25 @@ function finishQuiz() {
             </div>
         </div>
     `;
-
+    
     document.getElementById('review-quiz').addEventListener('click', () => {
         currentQuestionIndex = 0;
         showQuestion(currentQuestionIndex);
     });
-
+    
     document.getElementById('new-quiz').addEventListener('click', () => {
         quizContainer.classList.remove('active');
         initializeQuizSystem();
     });
-
+    
     saveToLeaderboard(userScore, percentage);
-
+    
     showNotification(`تهانينا! لقد حصلت على ${userScore} نقطة في الاختبار`, 'success');
 }
 
 function saveToLeaderboard(score, percentage) {
     let leaderboard = JSON.parse(localStorage.getItem('quizLeaderboard') || '[]');
-
+    
     const username = localStorage.getItem('username') || `مستخدم ${Math.floor(Math.random() * 1000)}`;
     const newEntry = {
         username: username,
@@ -1672,24 +1672,24 @@ function saveToLeaderboard(score, percentage) {
         date: new Date().toLocaleDateString('ar-EG'),
         level: currentQuiz
     };
-
+    
     leaderboard.push(newEntry);
-
+    
     leaderboard.sort((a, b) => b.score - a.score);
-
+    
     leaderboard = leaderboard.slice(0, 10);
-
+    
     localStorage.setItem('quizLeaderboard', JSON.stringify(leaderboard));
-
+    
     updateLeaderboard();
 }
 
 function updateLeaderboard() {
     const leaderboardBody = document.getElementById('leaderboard-body');
     const leaderboard = JSON.parse(localStorage.getItem('quizLeaderboard') || '[]');
-
+    
     leaderboardBody.innerHTML = '';
-
+    
     if (leaderboard.length === 0) {
         leaderboardBody.innerHTML = `
             <div style="text-align: center; padding: 2rem; color: var(--secondary-color);">
@@ -1699,11 +1699,11 @@ function updateLeaderboard() {
         `;
         return;
     }
-
+    
     leaderboard.forEach((entry, index) => {
         const row = document.createElement('div');
         row.className = 'leaderboard-row';
-
+        
         let badgeCount = '';
         if (entry.percentage >= 80) {
             badgeCount = '<div class="badge" style="background: linear-gradient(135deg, #FFD700, #FFA500)">🥇</div>';
@@ -1712,7 +1712,7 @@ function updateLeaderboard() {
         } else {
             badgeCount = '<div class="badge" style="background: linear-gradient(135deg, #cd7f32, #a0522d)">🥉</div>';
         }
-
+        
         row.innerHTML = `
             <div class="leaderboard-rank">#${index + 1}</div>
             <div class="leaderboard-user">
@@ -1725,7 +1725,7 @@ function updateLeaderboard() {
             <div class="leaderboard-score">${entry.score}</div>
             <div class="leaderboard-badges">${badgeCount}</div>
         `;
-
+        
         leaderboardBody.appendChild(row);
     });
 }
@@ -1742,14 +1742,14 @@ function initializeAIAssistant() {
     const aiCloseChat = document.getElementById('ai-close-chat');
     const aiSuggestions = document.getElementById('ai-suggestions');
     const aiFeatures = document.querySelectorAll('.ai-feature');
-
+    
     function getCurrentTime() {
         const now = new Date();
         return formatTime12Hour(now, currentTimezone);
     }
-
+    
     document.getElementById('welcome-time').textContent = getCurrentTime();
-
+    
     const aiResponses = {
         "السلام عليكم": ["وعليكم السلام ورحمة الله وبركاته! أهلاً وسهلاً بيك. كيف يمكنني مساعدتك اليوم؟"],
         "مرحبا": ["مرحباً بيك! 🌟 إزاي أقدر أساعدك النهاردة؟"],
@@ -1760,23 +1760,23 @@ function initializeAIAssistant() {
         "ترجمة": ["أقدر أساعدك في الترجمة بين العربية والإنجليزية. اكتب الجملة اللي عايز تترجمها."],
         "معلومات تاريخية": ["أقدر أقدم لك معلومات تاريخية مفصلة عن أي فترة من فترات التاريخ المصري."]
     };
-
+    
     aiToggle.addEventListener('click', () => {
         aiChat.classList.toggle('active');
     });
-
+    
     aiCloseChat.addEventListener('click', () => {
         aiChat.classList.remove('active');
     });
-
+    
     function sendMessage() {
         const message = aiInput.value.trim();
         if (message === '') return;
-
+        
         addMessage(message, 'user');
         aiInput.value = '';
         aiSend.disabled = true;
-
+        
         const typingIndicator = document.createElement('div');
         typingIndicator.className = 'typing-indicator';
         typingIndicator.innerHTML = `
@@ -1786,69 +1786,69 @@ function initializeAIAssistant() {
         `;
         aiMessages.appendChild(typingIndicator);
         aiMessages.scrollTop = aiMessages.scrollHeight;
-
+        
         setTimeout(() => {
             aiMessages.removeChild(typingIndicator);
-
+            
             let response = generateAIResponse(message);
             addMessage(response, 'ai');
             aiSend.disabled = false;
         }, 1500 + Math.random() * 1000);
     }
-
+    
     function generateAIResponse(message) {
         for (const [key, values] of Object.entries(aiResponses)) {
             if (message.toLowerCase().includes(key.toLowerCase())) {
                 return values[Math.floor(Math.random() * values.length)];
             }
         }
-
+        
         const generalResponses = [
             "هذا سؤال مثير للاهتمام! يمكنني مساعدتك في ذلك.",
             "أفهم استفسارك. دعني أفكر في أفضل طريقة للإجابة...",
             "هذا موضوع رائع! بناءً على معرفتي، يمكنني تقديم المعلومات التالية:"
         ];
-
+        
         return generalResponses[Math.floor(Math.random() * generalResponses.length)];
     }
-
+    
     function addMessage(text, sender) {
         const messageElement = document.createElement('div');
         messageElement.className = `message ${sender}-message`;
-
+        
         const timeElement = document.createElement('div');
         timeElement.className = 'message-time';
         timeElement.textContent = getCurrentTime();
-
+        
         messageElement.textContent = text;
         messageElement.appendChild(timeElement);
-
+        
         aiMessages.appendChild(messageElement);
         aiMessages.scrollTop = aiMessages.scrollHeight;
     }
-
+    
     aiSend.addEventListener('click', sendMessage);
-
+    
     aiInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             sendMessage();
         }
     });
-
+    
     aiSuggestions.querySelectorAll('.ai-suggestion').forEach(suggestion => {
-        suggestion.addEventListener('click', function () {
+        suggestion.addEventListener('click', function() {
             const suggestionText = this.getAttribute('data-suggestion');
             aiInput.value = suggestionText;
             sendMessage();
         });
     });
-
+    
     aiFeatures.forEach(feature => {
-        feature.addEventListener('click', function () {
+        feature.addEventListener('click', function() {
             const featureType = this.getAttribute('data-feature');
             let message = "";
-
-            switch (featureType) {
+            
+            switch(featureType) {
                 case 'plan_trip':
                     message = "أريد مساعدتك في تخطيط رحلة سياحية. أخبرني بالمدة والميزانية والاهتمامات.";
                     break;
@@ -1862,7 +1862,7 @@ function initializeAIAssistant() {
                     message = "أريد ترجمة نص من العربية إلى الإنجليزية أو العكس. ما هو النص الذي تريد ترجمته؟";
                     break;
             }
-
+            
             aiInput.value = message;
             sendMessage();
         });
@@ -1883,41 +1883,41 @@ function createParticles() {
 }
 
 // ==================== تهيئة النظام ====================
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-mode');
         document.getElementById('theme-toggle').innerHTML = '<i class="fas fa-sun"></i>';
     }
-
+    
     document.getElementById('theme-toggle').addEventListener('click', toggleDarkMode);
-
+    
     document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function (e) {
+        link.addEventListener('click', function(e) {
             e.preventDefault();
             const section = this.getAttribute('data-section');
             switchSection(section);
         });
     });
-
-    document.getElementById('timezone-select').addEventListener('change', function () {
+    
+    document.getElementById('timezone-select').addEventListener('change', function() {
         changeTimezone(this.value);
     });
-
+    
     document.querySelectorAll('.close-modal').forEach(button => {
-        button.addEventListener('click', function () {
+        button.addEventListener('click', function() {
             this.closest('.modal').classList.remove('active');
         });
     });
-
+    
     document.querySelectorAll('.modal').forEach(modal => {
-        modal.addEventListener('click', function (e) {
+        modal.addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('active');
             }
         });
     });
-
+    
     displaySites();
     displayKings();
     initializeSearchSystem();
@@ -1926,16 +1926,16 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeQuizSystem();
     updateLeaderboard();
     initializeAIAssistant();
-
+    
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('date').value = today;
     document.getElementById('date').min = today;
-
+    
     const systemLanguage = detectSystemLanguage();
-    const welcomeMessage = systemLanguage === 'ar' ?
-        'مرحباً بك في تطبيق أبو الهول للرحلات الأثرية!' :
+    const welcomeMessage = systemLanguage === 'ar' ? 
+        'مرحباً بك في تطبيق أبو الهول للرحلات الأثرية!' : 
         'Welcome to the Sphinx Archaeological Tours App!';
-
+    
     showNotification(welcomeMessage, 'success');
 });
 
